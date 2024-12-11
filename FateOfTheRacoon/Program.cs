@@ -1,10 +1,16 @@
-﻿namespace FateOfTheRacoon
+﻿using System;
+
+namespace FateOfTheRacoon
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
             HintergrundMusik.Mp3Abspielen("");
+            Start.MenuAnzeigen();
+
+
+            
         }
     }
 }
