@@ -21,7 +21,7 @@ namespace FateOfTheRacoon
             
           
 
-            mp3Pfad = @"Hintergrundmusik\Moana.wav";
+            mp3Pfad = @"Hintergrundmusik\Dschafar-DifferentStories.wav";
             string hauptOrdner = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
             string ganzerPfad = Path.Combine(hauptOrdner, mp3Pfad);
 
