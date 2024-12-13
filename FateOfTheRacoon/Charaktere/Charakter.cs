@@ -9,7 +9,9 @@ namespace FateOfTheRacoon.Charaktere
 {
     public abstract class Charakter
     {
-        public int MaxLeben = 100;
+        private int maxLeben = 100;
+
+        public int MaxLeben { get => maxLeben; set => maxLeben = value; }
 
         private string _name;
 
@@ -34,6 +36,7 @@ namespace FateOfTheRacoon.Charaktere
             get { return _leben; }
             set { _leben = value; }
         }
-      
+
+        
     }
 }

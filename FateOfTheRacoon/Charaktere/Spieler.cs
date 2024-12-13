@@ -19,5 +19,29 @@ namespace FateOfTheRacoon.Charaktere
             Erfahrungspunkte = 0;
         }
 
+        public int erforderlicheExp = 100;
+
+        public void ErhoeheExp(int exp)
+        {
+            Erfahrungspunkte += exp;
+            Console.WriteLine($"Du hast {exp} Erfahrungspunkte erhalten.");
+            PruefeLvlUp();
+        }
+        
+        public void PruefeLvlUp()
+        {
+            if (Erfahrungspunkte >= erforderlicheExp) LvlUp();
+        }
+
+        private void LvlUp()
+        {
+            Level++;
+            Erfahrungspunkte -= 100;
+            MaxLeben += 20;
+            Staerke += 10;
+            Console.WriteLine($"Du bist ein Level aufgestiegen!");
+        }
+
+        
     }
 }

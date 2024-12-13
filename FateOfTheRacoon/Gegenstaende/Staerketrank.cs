@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FateOfTheRacoon.Charaktere;
 
 namespace FateOfTheRacoon.Gegenstaende
 {
@@ -14,11 +15,12 @@ namespace FateOfTheRacoon.Gegenstaende
         {
             Effekte.Add(ItemEffekt.Schaden, staerkeBonus);
         }
-
+        
         // Methode, die den Effekt des Staerketrankes anzeigt
-        public void Anwenden()
+        public void Anwenden(Spieler spieler)
         {
-            Console.WriteLine($"Der {Name} wird angewendet und gibt dir {Effekte[ItemEffekt.Schaden]} zusätzlichen Schaden.");
+            spieler.Staerke += Effekte[ItemEffekt.Schaden];
+            Console.WriteLine($"Der Stärketrank wird angewendet und gibt dir {Effekte[ItemEffekt.Schaden]} zusätzliche Stärke.");
         }
 
     }

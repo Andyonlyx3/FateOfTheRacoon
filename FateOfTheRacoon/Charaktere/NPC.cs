@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace FateOfTheRacoon.Charaktere
 {
-    internal class NPC
+    public abstract class NPC : Charakter
     {
+        public string Beschreibung { get; set; }
+        public NPC()
+        {
+            Name = string.Empty;
+            Beschreibung = string.Empty;
+            Leben = MaxLeben;
+            Staerke = 0;
+        }
     }
 }
