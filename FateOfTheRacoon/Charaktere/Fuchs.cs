@@ -12,7 +12,7 @@ namespace FateOfTheRacoon.Charaktere
         {
             Name = "Fuchs";
             Leben = 100;
-            Staerke = 20;
+            Staerke = 10;
         }
 
         public void Angreifen(Spieler spieler)

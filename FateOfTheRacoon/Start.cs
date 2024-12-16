@@ -1,4 +1,6 @@
 ﻿using System;
+using FateOfTheRacoon.Charaktere;
+using FateOfTheRacoon.Ebenen;
 
 namespace FateOfTheRacoon
 {
@@ -61,13 +63,15 @@ namespace FateOfTheRacoon
         }
 
         // Diese Methode führt die gewählte Option aus
+        public static GegnerRaum gegnerRaum = new GegnerRaum();
+
+        public static Spieler spieler = new Spieler();
         private static void Auswaehlen(string option)
         {
             switch (option)
             {
                 case "Neues Spiel":
-                    Console.WriteLine("Spiel Starten");
-                    // Hier wird die Option für den Start eines neuen Spiels eingefügt
+                    gegnerRaum.GegnerInteraktion(spieler);
                     break;
                 case "Spielstand Laden":
                     Console.WriteLine("Spielstand wird geladen.");

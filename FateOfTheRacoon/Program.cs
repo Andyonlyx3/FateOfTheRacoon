@@ -1,5 +1,6 @@
 ﻿using System;
 using FateOfTheRacoon.Charaktere;
+using FateOfTheRacoon.Ebenen;
 using FateOfTheRacoon.Gegenstaende;
 
 namespace FateOfTheRacoon
@@ -9,7 +10,7 @@ namespace FateOfTheRacoon
         static void Main(string[] args)
         {
         
-            
+            GegnerRaum gegnerRaum = new GegnerRaum();
             
             Spieler spieler = new Spieler();
 
@@ -18,7 +19,8 @@ namespace FateOfTheRacoon
             Start.MenuAnzeigen();
 
 
-            
+
+
         }
     }
 }
