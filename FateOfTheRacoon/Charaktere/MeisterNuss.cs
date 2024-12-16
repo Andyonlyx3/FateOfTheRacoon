@@ -21,6 +21,7 @@ namespace FateOfTheRacoon.Charaktere
             Console.WriteLine(Beschreibung);
             Staerketrank staerketrank = new Staerketrank("Stärketrank", 20);
             staerketrank.Anwenden(spieler);
+            
         }
     }
 }

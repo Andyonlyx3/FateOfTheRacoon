@@ -9,11 +9,11 @@ namespace FateOfTheRacoon
     {
         static void Main(string[] args)
         {
-        
-            GegnerRaum gegnerRaum = new GegnerRaum();
-            
-            Spieler spieler = new Spieler();
 
+            Spieler spieler = new Spieler();
+            GegnerRaum gegnerRaum = new GegnerRaum(spieler);
+            
+           
             HintergrundMusik.Mp3Abspielen("");
 
             Start.MenuAnzeigen();

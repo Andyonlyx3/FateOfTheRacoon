@@ -63,7 +63,7 @@ namespace FateOfTheRacoon
         }
 
         // Diese Methode führt die gewählte Option aus
-        public static GegnerRaum gegnerRaum = new GegnerRaum();
+        public static NPCRaum npcRaum = new NPCRaum(spieler);
 
         public static Spieler spieler = new Spieler();
         private static void Auswaehlen(string option)
@@ -71,7 +71,7 @@ namespace FateOfTheRacoon
             switch (option)
             {
                 case "Neues Spiel":
-                    gegnerRaum.GegnerInteraktion(spieler);
+                    npcRaum.NPCInteraktion(spieler);
                     break;
                 case "Spielstand Laden":
                     Console.WriteLine("Spielstand wird geladen.");

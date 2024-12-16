@@ -16,10 +16,11 @@ namespace FateOfTheRacoon.Ebenen
             "Fliehen",
         };
 
-        public GegnerRaum()
+        public GegnerRaum(Spieler spieler)
         {
             Gegner = gegnerAuswahl[zufallsGenerator.Next(gegnerAuswahl.Length)];
-            Beschreibung = $"Du kommst in einen Raum, in dem ein/e {Gegner.Name} auf dich wartet.";
+            Name = Gegner.Name;
+            Beschreibung = $"{spieler} kommt in einen Raum, in dem ein/e {Name} auf ihn wartet.";
         }
 
         // Hauptmethode für die Interaktion mit dem Gegner
@@ -77,10 +78,10 @@ namespace FateOfTheRacoon.Ebenen
                     Angreifen(spieler);
                     break;
                 case "Fliehen":
-                    Fliehen();
+                    Fliehen(spieler);
                     break;
                 default:
-                    Console.WriteLine("Ungültige Option.");
+                    
                     break;
             }
         }
@@ -121,8 +122,8 @@ namespace FateOfTheRacoon.Ebenen
             }
         }
 
-        // Methode zum Fliehen
-        private void Fliehen()
+        // Methode zum Fliehen mit einer wahrscheinlichkeit von 50%
+        private void Fliehen(Spieler spieler)
         {
             bool fluchtErfolgreich = zufallsGenerator.Next(2) == 0;
 
@@ -133,6 +134,8 @@ namespace FateOfTheRacoon.Ebenen
             else
             {
                 Console.WriteLine("Die Flucht ist fehlgeschlagen!");
+                Console.ReadKey();
+                GegnerInteraktion(spieler);
             }
         }
     }
