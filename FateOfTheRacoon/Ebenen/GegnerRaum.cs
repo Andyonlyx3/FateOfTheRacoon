@@ -113,7 +113,7 @@ namespace FateOfTheRacoon.Ebenen
 
             if (spieler.Leben <= 0)
             {
-                Console.WriteLine($"{spieler.Name} wurde besiegt! Spiel vorbei.");
+                GameOver.GameOverInteraktion();
             }
             else
             {

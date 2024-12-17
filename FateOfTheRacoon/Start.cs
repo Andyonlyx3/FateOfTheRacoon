@@ -62,16 +62,22 @@ namespace FateOfTheRacoon
             }
         }
 
-        // Diese Methode führt die gewählte Option aus
+        
         public static NPCRaum npcRaum = new NPCRaum(spieler);
 
+        public static BossRaum bossRaum = new BossRaum(spieler);
         public static Spieler spieler = new Spieler();
-        private static void Auswaehlen(string option)
+        
+        private static void Auswaehlen(string option)       // Diese Methode führt die gewählte Option aus
         {
             switch (option)
             {
                 case "Neues Spiel":
-                    npcRaum.NPCInteraktion(spieler);
+                    spieler.Staerke = 20;
+                    spieler.Erfahrungspunkte = 0;
+                    spieler.Level = 1;
+                    spieler.MaxLeben = spieler.Leben = 100;
+                    bossRaum.GegnerInteraktion(spieler);
                     break;
                 case "Spielstand Laden":
                     Console.WriteLine("Spielstand wird geladen.");

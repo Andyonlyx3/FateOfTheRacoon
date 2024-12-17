@@ -21,7 +21,7 @@ namespace FateOfTheRacoon.Ebenen
         public BossRaum(Spieler spieler)
         {
             Name = truck.Name;
-            Beschreibung = $"{spieler.Name} kommt in einen Raum, in dem {truck.Name} auf ihn wartet.";
+            Beschreibung = $"Coonie kommt in einen Raum, in dem {truck.Name} auf ihn wartet.";
         }
 
         // Hauptmethode für die Interaktion mit Truck-Kuhn
@@ -114,7 +114,7 @@ namespace FateOfTheRacoon.Ebenen
 
             if (spieler.Leben <= 0)
             {
-                Console.WriteLine($"{spieler.Name} wurde besiegt! Spiel vorbei.");
+                GameOver.GameOverInteraktion();
             }
             else
             {
