@@ -17,9 +17,9 @@ namespace FateOfTheRacoon.Gegenstaende
         }
         
         // Methode, die den Effekt des Staerketrankes anzeigt
-        public void Anwenden(Spieler spieler)
+        public void Anwenden()
         {
-            spieler.Staerke += Effekte[ItemEffekt.Schaden];
+            Start.spieler.Staerke += Effekte[ItemEffekt.Schaden];
             Console.WriteLine($"Der Stärketrank wird angewendet und gibt dir {Effekte[ItemEffekt.Schaden]} zusätzliche Stärke.");
         }
 

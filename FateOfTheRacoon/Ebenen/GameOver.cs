@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO; // Für Dateimanipulation
 using FateOfTheRacoon.Charaktere;
 
 namespace FateOfTheRacoon.Ebenen
@@ -15,13 +12,20 @@ namespace FateOfTheRacoon.Ebenen
             "Zurück zum Hauptmenü",
             "Spiel Beenden",
         };
-        public  GameOver() 
+
+        private static readonly string SpeicherPfad = "spielstand.json";
+
+        public GameOver()
         {
             Name = "Game Over";
             Beschreibung = "Du hast verloren.";
         }
+
         public static void GameOverInteraktion()
         {
+            // Lösche den gespeicherten Spielstand
+            SpielstandLoeschen();
+
             ConsoleKey gedrueckt;
             do
             {
@@ -71,16 +75,35 @@ namespace FateOfTheRacoon.Ebenen
             switch (option)
             {
                 case "Zurück zum Hauptmenü":
-                    
                     Start.MenuAnzeigen();
                     break;
                 case "Spiel Beenden":
+                    Environment.Exit(0); // Beendet das Programm
                     break;
                 default:
-
                     break;
             }
         }
 
+        // Löscht die Spielstand-Datei
+        private static void SpielstandLoeschen()
+        {
+            if (File.Exists(SpeicherPfad))
+            {
+                try
+                {
+                    File.Delete(SpeicherPfad);
+                    Console.WriteLine("Der gespeicherte Spielstand wurde gelöscht.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Fehler beim Löschen des Spielstands: {ex.Message}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Kein gespeicherter Spielstand gefunden, der gelöscht werden könnte.");
+            }
+        }
     }
 }

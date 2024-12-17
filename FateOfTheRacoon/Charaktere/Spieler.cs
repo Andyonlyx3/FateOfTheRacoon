@@ -6,18 +6,15 @@ using System.Threading.Tasks;
 
 namespace FateOfTheRacoon.Charaktere
 {
-    public class Spieler : Charakter
+    public class Spieler
     {
-        public int Level { get; set; }
-        public int Erfahrungspunkte { get; set; }
-        public Spieler()
-        {
-            Name = "Coonie";
-            Leben = MaxLeben;
-            Staerke = 20;
-            Level = 1;
-            Erfahrungspunkte = 0;
-        }
+        public int Level = 1;
+        public int Erfahrungspunkte = 0;
+        public string Name = "Coonie";
+        public int  Leben = 100;
+        public int MaxLeben = 100;
+        public int Staerke = 20;
+            
 
         public int erforderlicheExp = 100;
 
@@ -39,6 +36,7 @@ namespace FateOfTheRacoon.Charaktere
             Erfahrungspunkte -= 100;
             MaxLeben += 20;
             Staerke += 10;
+            Leben = MaxLeben;
             Console.WriteLine($"Du bist ein Level aufgestiegen!");
         }
 

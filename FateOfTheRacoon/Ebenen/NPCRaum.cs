@@ -15,35 +15,37 @@ namespace FateOfTheRacoon.Ebenen
         public NPC NPC {  get; private set; }
 
 
-        public NPCRaum(Spieler spieler)
+        public NPCRaum()
         {
             NPC = npcAuswahl[zufallsGenerator.Next(npcAuswahl.Length)];
             Name = NPC.Name;
             Beschreibung = NPC.Beschreibung;
         }
-
-        public void NPCInteraktion(Spieler spieler)
+        
+        public void NPCInteraktion()
         {
-            switch (NPC.Name)
+            Console.Clear();
+            switch (NPC)
             {
-                case "Meister Nuss":
-                MeisterNuss meisterNuss = new MeisterNuss();
-                meisterNuss.TreffeMeisterNuss(spieler);
-                break;
-                case "Schildegart":
-                Schildegart schildegart = new Schildegart();
-                schildegart.TreffeSchildegart(spieler);
-                break;
-                case "Chimp Anse":
-                ChimpAnse chimpAnse = new ChimpAnse();
-                chimpAnse.TreffeChimpAnse(spieler);
-                break;
-                case "Meister Huhu":
-                MeisterHuhu meisterHuhu = new MeisterHuhu();
-                meisterHuhu.TreffeMeisterHuhu(spieler);
-                break;
-                    
+                case MeisterNuss meisterNuss:
+                    meisterNuss.TreffeMeisterNuss();
+                    break;
 
+                case Schildegart schildegart:
+                    schildegart.TreffeSchildegart();
+                    break;
+
+                case ChimpAnse chimpAnse:
+                    chimpAnse.TreffeChimpAnse();
+                    break;
+
+                case MeisterHuhu meisterHuhu:
+                    meisterHuhu.TreffeMeisterHuhu();
+                    break;
+
+                default:
+                    Console.WriteLine("Unbekannter NPC.");
+                    break;
             }
         }
     }

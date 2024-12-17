@@ -15,9 +15,11 @@ namespace FateOfTheRacoon.Gegenstaende
             Effekte.Add(ItemEffekt.Heilung, 0);
         }
 
-        public void Anwenden(Spieler spieler)
+        
+
+        public void Anwenden()
         {
-            spieler.Leben = spieler.MaxLeben;
+            Start.spieler.Leben = Start.spieler.MaxLeben;
             Console.WriteLine($"Der {Name} wird angewendet und heilt dein Leben wieder Voll.");
         }
     }

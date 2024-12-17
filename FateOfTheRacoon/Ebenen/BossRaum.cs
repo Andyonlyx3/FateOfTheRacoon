@@ -12,26 +12,30 @@ namespace FateOfTheRacoon.Ebenen
         Boss truck = new Boss();
         private static readonly Random zufallsGenerator = new Random();
         private int aktuellerIndex = 0;
+        
         private readonly string[] Optionen =
         {
             "Angreifen",
             "Fliehen",
         };
 
-        public BossRaum(Spieler spieler)
+        public BossRaum()
         {
+            
             Name = truck.Name;
             Beschreibung = $"Coonie kommt in einen Raum, in dem {truck.Name} auf ihn wartet.";
         }
 
         // Hauptmethode für die Interaktion mit Truck-Kuhn
-        public void GegnerInteraktion(Spieler spieler)
+        public void GegnerInteraktion()
         {
             ConsoleKey gedrueckt;
-            do
+            while (truck.Leben > 0 && Start.spieler.Leben > 0)
             {
                 Console.Clear();
-                Console.WriteLine(Beschreibung); // Zeigt den Gegner und seine Details an
+                Console.WriteLine(Beschreibung);
+                Console.WriteLine($"Gegner: {truck.Name} | Leben: {truck.Leben} | Stärke: {truck.Staerke}");
+                Console.WriteLine($"Spieler: {Start.spieler.Name} | Leben: {Start.spieler.Leben} | Stärke: {Start.spieler.Staerke}");
                 ZeigeMenu();
                 gedrueckt = Console.ReadKey(true).Key;
 
@@ -45,9 +49,10 @@ namespace FateOfTheRacoon.Ebenen
                 }
                 else if (gedrueckt == ConsoleKey.Enter)
                 {
-                    Auswaehlen(Optionen[aktuellerIndex], spieler);
+                    Auswaehlen(Optionen[aktuellerIndex]);
+                    break;
                 }
-            } while (gedrueckt != ConsoleKey.Enter);
+            } 
         }
 
         // Zeigt das Menü und hebt die aktuelle Auswahl hervor
@@ -71,15 +76,15 @@ namespace FateOfTheRacoon.Ebenen
         }
 
         // Führt die ausgewählte Aktion aus
-        private void Auswaehlen(string option, Spieler spieler)
+        private void Auswaehlen(string option)
         {
             switch (option)
             {
                 case "Angreifen":
-                    Angreifen(spieler);
+                    Angreifen();
                     break;
                 case "Fliehen":
-                    Fliehen(spieler);
+                    Fliehen();
                     break;
                 default:
                     
@@ -88,43 +93,43 @@ namespace FateOfTheRacoon.Ebenen
         }
 
         // Methode zum Angriff des Spielers auf den Gegner
-        private void Angreifen(Spieler spieler)
+        private void Angreifen()
         {
-            Console.WriteLine($"{spieler.Name} greift {truck.Name} an!");
-            truck.Leben -= spieler.Staerke;
-            Console.WriteLine($"{truck.Name} verliert {spieler.Staerke} Leben. Aktuelles Leben: {truck.Leben}");
+            Console.WriteLine($"{Start.spieler.Name} greift {truck.Name} an!");
+            truck.Leben -= Start.spieler.Staerke;
+            Console.WriteLine($"{truck.Name} verliert {Start.spieler.Staerke} Leben. Aktuelles Leben: {truck.Leben}");
 
             if (truck.Leben <= 0)
             {
                 Console.WriteLine($"{truck.Name} wurde besiegt!");
-                spieler.ErhoeheExp(100);
+                Start.spieler.ErhoeheExp(100);
             }
             else
             {
-                GegnerAngreifen(spieler);
+                GegnerAngreifen();
             }
         }
 
         // Gegner greift den Spieler an
-        private void GegnerAngreifen(Spieler spieler)
+        private void GegnerAngreifen()
         {
-            Console.WriteLine($"{truck.Name} greift {spieler.Name} an!");
-            spieler.Leben -= truck.Staerke;
-            Console.WriteLine($"{spieler.Name} verliert {truck.Staerke} Leben. Aktuelles Leben: {spieler.Leben}");
+            Console.WriteLine($"{truck.Name} greift {Start.spieler.Name} an!");
+            Start.spieler.Leben -= truck.Staerke;
+            Console.WriteLine($"{Start.spieler.Name} verliert {truck.Staerke} Leben. Aktuelles Leben: {Start.spieler.Leben}");
 
-            if (spieler.Leben <= 0)
+            if (Start.spieler.Leben <= 0)
             {
                 GameOver.GameOverInteraktion();
             }
             else
             {
                 Console.ReadKey();
-                GegnerInteraktion(spieler);
+                GegnerInteraktion();
             }
         }
 
         // Methode zum Fliehen mit einer Wahrscheinlichkeit von 20% 
-        private void Fliehen(Spieler spieler)
+        private void Fliehen()
         {
             bool fluchtErfolgreich = zufallsGenerator.Next(5) == 0;
 
@@ -136,7 +141,7 @@ namespace FateOfTheRacoon.Ebenen
             {
                 Console.WriteLine("Die Flucht ist fehlgeschlagen!");
                 Console.ReadKey();
-                GegnerInteraktion(spieler);
+                GegnerInteraktion();
             }
         }
     }

@@ -14,18 +14,18 @@ namespace FateOfTheRacoon.Charaktere
             Leben = 100;
             Staerke = 10;
         }
-
-        public void Angreifen(Spieler spieler)
+       
+        public void Angreifen()
         {
             Console.WriteLine($"Du greifst die {Name} an.");
-            Leben -= spieler.Staerke;
+            Leben -= Start.spieler.Staerke;
             Thread.Sleep(1000);
             Console.WriteLine($"Die {Name} hat noch {Leben} Lebenspunkte.");
             Thread.Sleep(2000);
             Console.WriteLine($"\nDie {Name} wehrt sich.");
-            spieler.Leben -= Staerke;
+            Start.spieler.Leben -= Staerke;
             Thread.Sleep(1000);
-            Console.WriteLine($"Du hast noch {spieler.Leben} Lebenspunkte.");
+            Console.WriteLine($"Du hast noch {Start.spieler.Leben} Lebenspunkte.");
             Console.ReadKey();
         }
 

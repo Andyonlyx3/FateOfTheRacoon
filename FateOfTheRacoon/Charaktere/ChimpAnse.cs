@@ -8,17 +8,19 @@ namespace FateOfTheRacoon.Charaktere
 {
     public class ChimpAnse : NPC
     {
+        
         public ChimpAnse() 
         {
             Name = "Chimp Anse";
             Beschreibung = "Chimp Anse ist ein Meister der Kampfkünste. Er Trainiert mit dir eine Runde.";
         }
-
-        public void TreffeChimpAnse(Spieler spieler)
+        
+        public void TreffeChimpAnse()
         {
             Console.WriteLine($"Du triffst auf {Name}.");
             Console.WriteLine(Beschreibung);
-            spieler.ErhoeheExp(20);
+            Start.spieler.ErhoeheExp(40);
+
         }
     }
 }

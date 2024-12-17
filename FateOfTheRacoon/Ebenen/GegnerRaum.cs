@@ -7,31 +7,34 @@ namespace FateOfTheRacoon.Ebenen
     {
         private static readonly Gegner[] gegnerAuswahl = { new Fuchs(), new Adler(), new Schlange() };
         private static readonly Random zufallsGenerator = new Random();
-        public Gegner Gegner { get; private set; }
-
+        public Gegner Gegner { get; private set; }      
         private int aktuellerIndex = 0;
+
         private readonly string[] Optionen =
         {
             "Angreifen",
             "Fliehen",
         };
 
-        public GegnerRaum(Spieler spieler)
+        public GegnerRaum()
         {
+            
             Gegner = gegnerAuswahl[zufallsGenerator.Next(gegnerAuswahl.Length)];
             Name = Gegner.Name;
-            Beschreibung = $"{spieler} kommt in einen Raum, in dem ein/e {Name} auf ihn wartet.";
+            Beschreibung = $"Coonie kommt in einen Raum, in dem ein/e {Name} auf ihn wartet.";
         }
 
-        // Hauptmethode für die Interaktion mit dem Gegner
-        public void GegnerInteraktion(Spieler spieler)
+        public void GegnerInteraktion()
         {
             ConsoleKey gedrueckt;
-            do
+            while (Gegner.Leben > 0 && Start.spieler.Leben > 0)
             {
                 Console.Clear();
-                Console.WriteLine(Beschreibung); // Zeigt den Gegner und seine Details an
+                Console.WriteLine(Beschreibung);
+                Console.WriteLine($"Gegner: {Gegner.Name} | Leben: {Gegner.Leben} | Stärke: {Gegner.Staerke}");
+                Console.WriteLine($"Spieler: {Start.spieler.Name} | Leben: {Start.spieler.Leben} | Stärke: {Start.spieler.Staerke}");
                 ZeigeMenu();
+
                 gedrueckt = Console.ReadKey(true).Key;
 
                 if (gedrueckt == ConsoleKey.UpArrow)
@@ -44,12 +47,18 @@ namespace FateOfTheRacoon.Ebenen
                 }
                 else if (gedrueckt == ConsoleKey.Enter)
                 {
-                    Auswaehlen(Optionen[aktuellerIndex], spieler);
+                    if (Auswaehlen(Optionen[aktuellerIndex]))
+                        break; // Flucht erfolgreich -> Schleife verlassen
                 }
-            } while (gedrueckt != ConsoleKey.Enter);
+            }
+
+            if (Start.spieler.Leben <= 0)
+            {
+                Console.WriteLine("Coonie wurde besiegt...");
+                GameOver.GameOverInteraktion();
+            }
         }
 
-        // Zeigt das Menü und hebt die aktuelle Auswahl hervor
         private void ZeigeMenu()
         {
             for (int i = 0; i < Optionen.Length; i++)
@@ -69,73 +78,60 @@ namespace FateOfTheRacoon.Ebenen
             Console.ResetColor();
         }
 
-        // Führt die ausgewählte Aktion aus
-        private void Auswaehlen(string option, Spieler spieler)
+        private bool Auswaehlen(string option)
         {
             switch (option)
             {
                 case "Angreifen":
-                    Angreifen(spieler);
-                    break;
+                    Angreifen();
+                    return false;
                 case "Fliehen":
-                    Fliehen(spieler);
-                    break;
+                    return Fliehen();
                 default:
-                    
-                    break;
+                    return false;
             }
         }
 
-        // Methode zum Angriff des Spielers auf den Gegner
-        private void Angreifen(Spieler spieler)
+        private void Angreifen()
         {
-            Console.WriteLine($"{spieler.Name} greift {Gegner.Name} an!");
-            Gegner.Leben -= spieler.Staerke;
-            Console.WriteLine($"{Gegner.Name} verliert {spieler.Staerke} Leben. Aktuelles Leben: {Gegner.Leben}");
+            Console.WriteLine($"{Start.spieler.Name} greift {Gegner.Name} an!");
+            Gegner.Leben -= Start.spieler.Staerke;
+            Console.WriteLine($"{Gegner.Name} verliert {Start.spieler.Staerke} Leben. Aktuelles Leben: {Gegner.Leben}");
 
             if (Gegner.Leben <= 0)
             {
                 Console.WriteLine($"{Gegner.Name} wurde besiegt!");
-                spieler.ErhoeheExp(20);
+                Start.spieler.ErhoeheExp(20);
             }
             else
             {
-                GegnerAngreifen(spieler);
+                GegnerAngreifen();
             }
+
+            Console.ReadKey();
         }
 
-        // Gegner greift den Spieler an
-        private void GegnerAngreifen(Spieler spieler)
+        private void GegnerAngreifen()
         {
-            Console.WriteLine($"{Gegner.Name} greift {spieler.Name} an!");
-            spieler.Leben -= Gegner.Staerke;
-            Console.WriteLine($"{spieler.Name} verliert {Gegner.Staerke} Leben. Aktuelles Leben: {spieler.Leben}");
-
-            if (spieler.Leben <= 0)
-            {
-                GameOver.GameOverInteraktion();
-            }
-            else
-            {
-                Console.ReadKey();
-                GegnerInteraktion(spieler);
-            }
+            Console.WriteLine($"{Gegner.Name} greift {Start.spieler.Name} an!");
+            Start.spieler.Leben -= Gegner.Staerke;
+            Console.WriteLine($"{Start.spieler.Name} verliert {Gegner.Staerke} Leben. Aktuelles Leben: {Start.spieler.Leben}");
         }
 
-        // Methode zum Fliehen mit einer wahrscheinlichkeit von 50%
-        private void Fliehen(Spieler spieler)
+        private bool Fliehen()
         {
-            bool fluchtErfolgreich = zufallsGenerator.Next(2) == 0;
+            bool fluchtErfolgreich = zufallsGenerator.Next(2) == 0; // 50% Chance auf Erfolg
 
             if (fluchtErfolgreich)
             {
                 Console.WriteLine("Die Flucht war erfolgreich!");
+                return true; // Flucht erfolgreich
             }
             else
             {
                 Console.WriteLine("Die Flucht ist fehlgeschlagen!");
-                Console.ReadKey();
-                GegnerInteraktion(spieler);
+                GegnerAngreifen(); // Gegner greift an, wenn Flucht misslingt
+                return false; // Flucht nicht erfolgreich
             }
         }
     }

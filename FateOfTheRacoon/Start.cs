@@ -6,6 +6,7 @@ namespace FateOfTheRacoon
 {
     internal class Start
     {
+        public static Spieler spieler = new Spieler();
         private static int aktuellerIndex = 0; // Der Index der aktuell ausgewählten Option
         private static readonly string[] Optionen =
         {
@@ -63,25 +64,23 @@ namespace FateOfTheRacoon
         }
 
         
-        public static NPCRaum npcRaum = new NPCRaum(spieler);
+        
 
-        public static BossRaum bossRaum = new BossRaum(spieler);
-        public static Spieler spieler = new Spieler();
+        
+        
         
         private static void Auswaehlen(string option)       // Diese Methode führt die gewählte Option aus
         {
             switch (option)
             {
-                case "Neues Spiel":
-                    spieler.Staerke = 20;
-                    spieler.Erfahrungspunkte = 0;
-                    spieler.Level = 1;
-                    spieler.MaxLeben = spieler.Leben = 100;
-                    bossRaum.GegnerInteraktion(spieler);
+                case "Neues Spiel":                   
+                    RaumAuswahl.ZufallsRaum();
                     break;
                 case "Spielstand Laden":
-                    Console.WriteLine("Spielstand wird geladen.");
-                    // Hier wird die Option zum Laden des Spielstands eingefügt
+                    spieler = SpeicherVerwaltung.Laden(); // Spielstand laden oder neuen Spieler erstellen
+                    Console.WriteLine($"Spieler geladen: {Start.spieler.Name}, Level: {Start.spieler.Level}, Leben: {spieler.Leben}");
+                    Console.ReadKey();
+                    RaumAuswahl.ZufallsRaum();
                     break;
                 case "Einstellungen":
                     Einstellungen.SoundEinstellung();

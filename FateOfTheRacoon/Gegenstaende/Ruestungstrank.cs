@@ -15,10 +15,10 @@ namespace FateOfTheRacoon.Gegenstaende
         {
             Effekte.Add(ItemEffekt.Leben, staerkeBonus);
         }
-
-        public void Anwenden(Spieler spieler)
+        
+        public void Anwenden()
         {
-            spieler.Leben += Effekte[ItemEffekt.Leben];
+            Start.spieler.Leben += Effekte[ItemEffekt.Leben];
             Console.WriteLine($"Der {Name} wird angewendet und gibt dir {Effekte[ItemEffekt.Leben]} zusätzliches Leben.");
         }
     }

@@ -14,12 +14,13 @@ namespace FateOfTheRacoon.Charaktere
             Name = "Meister Huhu";
             Beschreibung = "Die Eule Meister Huhu ist ein Heiler und gibt dir einen Heiltrank";
         }
-        public void TreffeMeisterHuhu(Spieler spieler)
+        
+        public void TreffeMeisterHuhu()
         {
             Console.WriteLine($"Du triffst auf {Name}.");
             Console.WriteLine(Beschreibung);
             Heiltrank heiltrank = new Heiltrank("Heiltrank");
-            heiltrank.Anwenden(spieler);
+            heiltrank.Anwenden();
         }
     }
 }

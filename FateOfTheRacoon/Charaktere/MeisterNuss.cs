@@ -14,13 +14,13 @@ namespace FateOfTheRacoon.Charaktere
             Name = "Meister Nuss";
             Beschreibung = "Das Eichhörnchen Meister Nuss ist ein Waffenexperte und gibt dir einen Stärketrank";
         }
-
-        public void TreffeMeisterNuss(Spieler spieler)
+        
+        public void TreffeMeisterNuss()
         {
             Console.WriteLine($"Du triffst auf {Name}.");
             Console.WriteLine(Beschreibung);
             Staerketrank staerketrank = new Staerketrank("Stärketrank", 20);
-            staerketrank.Anwenden(spieler);
+            staerketrank.Anwenden();
             
         }
     }
