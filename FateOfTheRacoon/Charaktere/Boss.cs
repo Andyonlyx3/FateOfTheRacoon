@@ -14,6 +14,7 @@ namespace FateOfTheRacoon.Charaktere
             Leben = 500;
             Staerke = 40;
         }
+        
        
         public void Angreifen()
         {

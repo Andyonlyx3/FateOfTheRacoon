@@ -32,6 +32,7 @@ namespace FateOfTheRacoon
                 using (outputDevice = new WaveOutEvent())
                 {
                     outputDevice.Init(audioFile);
+                    outputDevice.Volume = 0.5f;
                     outputDevice.Play();
 
                     // Starte den Playback-Thread

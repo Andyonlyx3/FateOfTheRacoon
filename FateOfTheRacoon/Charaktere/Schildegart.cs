@@ -17,6 +17,7 @@ namespace FateOfTheRacoon.Charaktere
         
         public void TreffeSchildegart()
         {
+            BildAusgabe.MyIMG("Schildegart.png");
             Console.WriteLine($"Du triffst auf {Name}.");
             Console.WriteLine(Beschreibung);
             Ruestungstrank ruestungstrank = new Ruestungstrank("Lebenstrank", 20);

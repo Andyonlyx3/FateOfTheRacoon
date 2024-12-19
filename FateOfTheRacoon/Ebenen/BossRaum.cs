@@ -29,13 +29,16 @@ namespace FateOfTheRacoon.Ebenen
         // Hauptmethode für die Interaktion mit Truck-Kuhn
         public void GegnerInteraktion()
         {
+            truck.Leben = 500;
+            Console.Clear();
+            BildAusgabe.MyIMG("TruckKun.png");
             ConsoleKey gedrueckt;
             while (truck.Leben > 0 && Start.spieler.Leben > 0)
             {
-                Console.Clear();
+                Console.SetCursorPosition(0, 50);
                 Console.WriteLine(Beschreibung);
                 Console.WriteLine($"Gegner: {truck.Name} | Leben: {truck.Leben} | Stärke: {truck.Staerke}");
-                Console.WriteLine($"Spieler: {Start.spieler.Name} | Leben: {Start.spieler.Leben} | Stärke: {Start.spieler.Staerke}");
+                Console.WriteLine($"Spieler: {Start.spieler.Name} | Leben: {Start.spieler.Leben} | Stärke: {Start.spieler.Staerke} ");
                 ZeigeMenu();
                 gedrueckt = Console.ReadKey(true).Key;
 
@@ -49,10 +52,16 @@ namespace FateOfTheRacoon.Ebenen
                 }
                 else if (gedrueckt == ConsoleKey.Enter)
                 {
-                    Auswaehlen(Optionen[aktuellerIndex]);
-                    break;
+                    if (Auswaehlen(Optionen[aktuellerIndex]))
+                            break;
                 }
-            } 
+                
+            }
+            if (Start.spieler.Leben <= 0)
+            {
+                Console.WriteLine("Coonie wurde besiegt...");
+                GameOver.GameOverInteraktion();
+            }
         }
 
         // Zeigt das Menü und hebt die aktuelle Auswahl hervor
@@ -66,29 +75,27 @@ namespace FateOfTheRacoon.Ebenen
                 }
                 else
                 {
-                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
 
                 Console.WriteLine(Optionen[i]);
             }
 
-            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         // Führt die ausgewählte Aktion aus
-        private void Auswaehlen(string option)
+        private bool Auswaehlen(string option)
         {
             switch (option)
             {
                 case "Angreifen":
                     Angreifen();
-                    break;
+                    return false;
                 case "Fliehen":
-                    Fliehen();
-                    break;
+                    return Fliehen();
                 default:
-                    
-                    break;
+                    return false;
             }
         }
 
@@ -108,6 +115,11 @@ namespace FateOfTheRacoon.Ebenen
             {
                 GegnerAngreifen();
             }
+
+            Console.ReadKey();
+            Console.SetCursorPosition(0, 55);
+            Console.WriteLine("                              \n                                                             \n                                    \n                                                          ");
+
         }
 
         // Gegner greift den Spieler an
@@ -116,32 +128,24 @@ namespace FateOfTheRacoon.Ebenen
             Console.WriteLine($"{truck.Name} greift {Start.spieler.Name} an!");
             Start.spieler.Leben -= truck.Staerke;
             Console.WriteLine($"{Start.spieler.Name} verliert {truck.Staerke} Leben. Aktuelles Leben: {Start.spieler.Leben}");
-
-            if (Start.spieler.Leben <= 0)
-            {
-                GameOver.GameOverInteraktion();
-            }
-            else
-            {
-                Console.ReadKey();
-                GegnerInteraktion();
-            }
+        
         }
 
         // Methode zum Fliehen mit einer Wahrscheinlichkeit von 20% 
-        private void Fliehen()
+        private bool Fliehen()
         {
             bool fluchtErfolgreich = zufallsGenerator.Next(5) == 0;
 
             if (fluchtErfolgreich)
             {
                 Console.WriteLine("Die Flucht war erfolgreich!");
+                return true;
             }
             else
             {
                 Console.WriteLine("Die Flucht ist fehlgeschlagen!");
-                Console.ReadKey();
-                GegnerInteraktion();
+                GegnerAngreifen();
+                return false;
             }
         }
     }

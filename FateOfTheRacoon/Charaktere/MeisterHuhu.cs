@@ -17,6 +17,8 @@ namespace FateOfTheRacoon.Charaktere
         
         public void TreffeMeisterHuhu()
         {
+            Console.Clear();
+            BildAusgabe.MyIMG("MeisterHuhu.png");
             Console.WriteLine($"Du triffst auf {Name}.");
             Console.WriteLine(Beschreibung);
             Heiltrank heiltrank = new Heiltrank("Heiltrank");

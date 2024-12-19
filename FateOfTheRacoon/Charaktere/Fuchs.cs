@@ -13,6 +13,7 @@ namespace FateOfTheRacoon.Charaktere
             Name = "Fuchs";
             Leben = 100;
             Staerke = 10;
+            Image = "Fuchs.png";
         }
 
         

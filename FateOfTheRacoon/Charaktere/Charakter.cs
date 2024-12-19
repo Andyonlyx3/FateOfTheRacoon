@@ -37,6 +37,12 @@ namespace FateOfTheRacoon.Charaktere
             set { _leben = value; }
         }
 
-        
+        private string _img;
+
+        public string Image
+        {
+            get { return _img; }
+            set { _img = value; }
+        }
     }
 }

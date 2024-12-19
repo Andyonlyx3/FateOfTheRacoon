@@ -13,6 +13,7 @@ namespace FateOfTheRacoon.Charaktere
             Name = "Adler";
             Leben = 100;
             Staerke = 10;
+            Image = "Adler1.png";
         }
         
 

@@ -26,13 +26,16 @@ namespace FateOfTheRacoon.Ebenen
 
         public void GegnerInteraktion()
         {
+            Gegner.Leben = Gegner.MaxLeben;
+            Console.Clear();
+            BildAusgabe.MyIMG(Gegner.Image);
             ConsoleKey gedrueckt;
             while (Gegner.Leben > 0 && Start.spieler.Leben > 0)
             {
-                Console.Clear();
+                Console.SetCursorPosition(0, 50);
                 Console.WriteLine(Beschreibung);
-                Console.WriteLine($"Gegner: {Gegner.Name} | Leben: {Gegner.Leben} | Stärke: {Gegner.Staerke}");
-                Console.WriteLine($"Spieler: {Start.spieler.Name} | Leben: {Start.spieler.Leben} | Stärke: {Start.spieler.Staerke}");
+                Console.WriteLine($"Gegner: {Gegner.Name} | Leben: {Gegner.Leben} | Stärke: {Gegner.Staerke} ");
+                Console.WriteLine($"Spieler: {Start.spieler.Name} | Leben: {Start.spieler.Leben} | Stärke: {Start.spieler.Staerke} ");
                 ZeigeMenu();
 
                 gedrueckt = Console.ReadKey(true).Key;
@@ -50,6 +53,7 @@ namespace FateOfTheRacoon.Ebenen
                     if (Auswaehlen(Optionen[aktuellerIndex]))
                         break; // Flucht erfolgreich -> Schleife verlassen
                 }
+                
             }
 
             if (Start.spieler.Leben <= 0)
@@ -69,13 +73,12 @@ namespace FateOfTheRacoon.Ebenen
                 }
                 else
                 {
-                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
 
                 Console.WriteLine(Optionen[i]);
             }
-
-            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         private bool Auswaehlen(string option)
@@ -109,6 +112,9 @@ namespace FateOfTheRacoon.Ebenen
             }
 
             Console.ReadKey();
+            Console.SetCursorPosition(0, 55);
+            Console.WriteLine("                        \n                                                       \n                              \n                                                    ");
+
         }
 
         private void GegnerAngreifen()

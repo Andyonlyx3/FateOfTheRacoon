@@ -13,6 +13,7 @@ namespace FateOfTheRacoon.Charaktere
             Name = String.Empty;
             Leben = 100;
             Staerke = 20;
+            Image = String.Empty;
         }
         
 

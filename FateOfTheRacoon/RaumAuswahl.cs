@@ -49,7 +49,7 @@ namespace FateOfTheRacoon
         private static void BetreteBossRaum()
         {
             Console.WriteLine("Du betrittst einen Bossraum!");
-            BossRaum bossRaum = new BossRaum();
+            BossRaum bossRaum = new BossRaum();            
             bossRaum.GegnerInteraktion();
         }
 

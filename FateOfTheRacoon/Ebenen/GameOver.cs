@@ -26,10 +26,12 @@ namespace FateOfTheRacoon.Ebenen
             // Lösche den gespeicherten Spielstand
             SpielstandLoeschen();
 
+            Console.Clear();
+            BildAusgabe.MyIMG("GameOver.png");
             ConsoleKey gedrueckt;
             do
             {
-                Console.Clear();
+                Console.SetCursorPosition(0, 50);
                 Console.WriteLine("Coonie ist gestorben.\nWas möchtest du nun tun?"); // Zeigt an das du gestorben bist.
                 ZeigeMenu();
                 gedrueckt = Console.ReadKey(true).Key;
@@ -60,13 +62,13 @@ namespace FateOfTheRacoon.Ebenen
                 }
                 else
                 {
-                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
 
                 Console.WriteLine(Optionen[i]);
             }
 
-            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         // Führt die ausgewählte Aktion aus

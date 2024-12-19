@@ -35,13 +35,11 @@ namespace FateOfTheRacoon.Ebenen
                 }
                 else
                 {
-                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
 
                 Console.WriteLine(Optionen[i]);
             }
-
-            Console.ResetColor();
         }
         private void Auswaehlen(string option)
         {
@@ -51,7 +49,9 @@ namespace FateOfTheRacoon.Ebenen
                     
                     break;
                 case "Rechts Lang":
-                    
+                    Console.WriteLine("Du betrittst einen Bossraum!");
+                    BossRaum bossRaum = new BossRaum();
+                    bossRaum.GegnerInteraktion();
                     break;
                 default:
 
@@ -64,20 +64,27 @@ namespace FateOfTheRacoon.Ebenen
             switch (AktuellerRaum)
             {
                 case "Treppe hoch":
+                    Console.Clear();
+                    BildAusgabe.MyIMG("TreppeHoch.png");
                     Console.WriteLine("Du siehst eine Treppe die nach oben führt.\nDu gehst die Treppe hinauf und erreichst eine neue Ebene.");
                     Console.ReadKey();
                     break;
 
                 case "Treppe runter":
+                    Console.Clear();
+                    BildAusgabe.MyIMG("TreppeRunter.png");
                     Console.WriteLine("Du siehst eine Treppe die nach unten führt.\nDu gehst die Treppe hinunter und erreichst einen tiefergelegenen Raum.");
                     Console.ReadKey();
                     break;
 
                 case "Weggabelung":
+                    Console.Clear();
+                    BildAusgabe.MyIMG("WegeKreuz.png");
                     Console.WriteLine("Du stehst vor einer Weggabelung. \nWähle deinen Weg weise.");
                     ConsoleKey gedrueckt;
                     do
                     {
+                        Console.SetCursorPosition(0, 52); // Text wird nach jedem wechsel Überschrieben
                         ZeigeMenu();
                         gedrueckt = Console.ReadKey(true).Key;
 
@@ -97,6 +104,8 @@ namespace FateOfTheRacoon.Ebenen
                     break;
 
                 case "Leerer Gang":
+                    Console.Clear();
+                    BildAusgabe.MyIMG("LangerGang.png");
                     Console.WriteLine("Du stehst in einem Leeren Gang. \nDu gehst weiter, ohne etwas zu finden.");
                     Console.ReadKey();
                     break;

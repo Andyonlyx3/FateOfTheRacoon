@@ -18,6 +18,7 @@ namespace FateOfTheRacoon.Gegenstaende
         
         public void Anwenden()
         {
+            Start.spieler.MaxLeben += Effekte[ItemEffekt.Leben];
             Start.spieler.Leben += Effekte[ItemEffekt.Leben];
             Console.WriteLine($"Der {Name} wird angewendet und gibt dir {Effekte[ItemEffekt.Leben]} zusätzliches Leben.");
         }

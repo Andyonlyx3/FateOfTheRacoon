@@ -18,10 +18,13 @@ namespace FateOfTheRacoon
 
         public static void MenuAnzeigen()
         {
+            Console.Clear();
+            BildAusgabe.MyIMG("Titel.png");
             ConsoleKey gedrueckt;
             do
             {
-                Console.Clear(); // Das Konsolenfenster wird bei jeder Schleife gelöscht
+                Console.SetCursorPosition(0, 50); // Text wird nach jedem wechsel Überschrieben
+                Console.ForegroundColor = ConsoleColor.White;
                 ZeigeMenu();
                 gedrueckt = Console.ReadKey(true).Key; // Die gedrückte Taste wird abgefragt
 
@@ -56,7 +59,7 @@ namespace FateOfTheRacoon
                 }
                 else
                 {
-                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
 
                 Console.WriteLine(Optionen[i]);

@@ -17,6 +17,8 @@ namespace FateOfTheRacoon.Charaktere
         
         public void TreffeChimpAnse()
         {
+            Console.Clear();
+            BildAusgabe.MyIMG("ChimpAnse.png");
             Console.WriteLine($"Du triffst auf {Name}.");
             Console.WriteLine(Beschreibung);
             Start.spieler.ErhoeheExp(40);

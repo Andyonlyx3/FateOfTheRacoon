@@ -17,6 +17,8 @@ namespace FateOfTheRacoon.Charaktere
         
         public void TreffeMeisterNuss()
         {
+            Console.Clear();
+            BildAusgabe.MyIMG("MeisterNuss.png");
             Console.WriteLine($"Du triffst auf {Name}.");
             Console.WriteLine(Beschreibung);
             Staerketrank staerketrank = new Staerketrank("Stärketrank", 20);

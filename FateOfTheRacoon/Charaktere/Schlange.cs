@@ -13,6 +13,7 @@ namespace FateOfTheRacoon.Charaktere
             Name = "Kobra";
             Leben = 100;
             Staerke = 10;
+            Image = "Kobra.png";
         }
        
         public void Angreifen()
