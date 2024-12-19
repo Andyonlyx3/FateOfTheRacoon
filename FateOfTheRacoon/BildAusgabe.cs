@@ -11,14 +11,13 @@ namespace FateOfTheRacoon
         internal static void MyIMG(string img_name) //hier wird der Name ünergeben zb. Bild.png
         {
             string gdir = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-            //gdir = gdir.Remove(gdir.Length - 10, 10);
             gdir += @"\Bilder\" + img_name;
             int res_x = 100;
             int res_y = 100;
 
 
             Bitmap image = new Bitmap(new Bitmap(gdir), new Size(res_x, res_y));
-            //Für res_x habe ich ein Feld mit int 240 und bei res_y ein int mit 100. Für die Bilder sollten ebenfalls die DIMENSIONEN 240px x 100px haben
+            //Für res_x habe ich ein Feld mit int 100 und bei res_y ein int mit 100. Für die Bilder sollten ebenfalls die DIMENSIONEN 100px x 100px haben
 
             VTConsole.Enable();
 
@@ -37,14 +36,7 @@ namespace FateOfTheRacoon
                 Console.WriteLine();
 
                 VTConsole.Disable();
-
-
-
-
             }
         }
     }
-
-
-
 }

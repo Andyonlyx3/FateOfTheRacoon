@@ -21,9 +21,9 @@ namespace FateOfTheRacoon
             
           
 
-            mp3Pfad = @"Hintergrundmusik\Dschafar-DifferentStories.wav";
-            string hauptOrdner = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-            string ganzerPfad = Path.Combine(hauptOrdner, mp3Pfad);
+            mp3Pfad = @"Hintergrundmusik\Dschafar-DifferentStories.wav"; //Position der Datei innerhalb des Projektordners
+            string hauptOrdner = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName; //Relativer Pfad der zum Projektordner "FadeOfTheRacoon" führt
+            string ganzerPfad = Path.Combine(hauptOrdner, mp3Pfad); //Gesammter Pfad der abgerufen werden kann.
 
             // Audio abspielen in einem separaten Thread
             System.Threading.Thread thread = new System.Threading.Thread(() =>
@@ -32,7 +32,7 @@ namespace FateOfTheRacoon
                 using (outputDevice = new WaveOutEvent())
                 {
                     outputDevice.Init(audioFile);
-                    outputDevice.Volume = 0.5f;
+                    outputDevice.Volume = 0.5f; //Startlautstärke
                     outputDevice.Play();
 
                     // Starte den Playback-Thread

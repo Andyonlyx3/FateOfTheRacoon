@@ -39,7 +39,5 @@ namespace FateOfTheRacoon.Charaktere
             Leben = MaxLeben;
             Console.WriteLine($"Du bist ein Level aufgestiegen!");
         }
-
-        
     }
 }
